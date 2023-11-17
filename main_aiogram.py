@@ -19,8 +19,8 @@ async def command_start_handler(message: Message):
     """
     This handler receives messages with `/start` command
     """
-    await message.answer(f"Привет!  {message.from_user.full_name}\nНапиши мне название города и я пришлю сводку "
-                         f"погоды!")
+    await message.answer(f"Привіт!  {message.from_user.full_name}\nНапиши мені назву міста і я надішлю зведення "
+                         f"погоди!")
 
 
 @dp.message()
@@ -32,11 +32,11 @@ async def echo_handler(message: types.Message) -> None:
     """
     code_to_smile = {
         "Clear": "Ясно \U00002600",
-        "Clouds": "Облачно \U00002601",
-        "Rain": "Дождь \U00002614",
-        "Drizzle": "Дождь \U00002614",
+        "Clouds": "Хмарно \U00002601",
+        "Rain": "Дощ \U00002614",
+        "Drizzle": "Дощ \U00002614",
         "Thunderstorm": "Гроза \U000026A1",
-        "Snow": "Снег \U0001F328",
+        "Snow": "Сніг \U0001F328",
         "Mist": "Туман \U0001F32B"
     }
 
@@ -54,7 +54,7 @@ async def echo_handler(message: types.Message) -> None:
         if weather_description in code_to_smile:
             wd = code_to_smile[weather_description]
         else:
-            wd = "Посмотри в окно, не пойму что там за погода!"
+            wd = "Подивися у вікно, не зрозумію, що там за погода!"
 
         humidity = data["main"]["humidity"]
         pressure = data["main"]["pressure"]
@@ -65,11 +65,10 @@ async def echo_handler(message: types.Message) -> None:
             data["sys"]["sunrise"])
 
         await message.reply(f"***{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')}***\n"
-                            f"Погода в городе: {city}\nТемпература: {cur_weather}C° {wd}\n"
-                            f"Влажность: {humidity}%\nДавление: {pressure} мм.рт.ст\nВетер: {wind} м/с\n"
-                            f"Восход солнца: {sunrise_timestamp}\nЗакат солнца: {sunset_timestamp}\nПродолжительность дня: {length_of_the_day}\n"
-                            f"***Хорошего дня!***"
-                            )
+                            f"Погода в місті: {city}\nТемпература: {cur_weather}C° {wd}\n"
+                            f"Вологість: {humidity}%\nТиск: {pressure} мм.рт.ст\nВітер: {wind} м/с\n"
+                            f"Схід сонця: {sunrise_timestamp}\nЗахід сонця: {sunset_timestamp}\n"
+                            f"Тривалість дня: {length_of_the_day}\n"f"***Гарного дня!***")
 
     except:
         await message.reply("\U00002620 Проверьте название города \U00002620")
